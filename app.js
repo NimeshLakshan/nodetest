@@ -1,19 +1,15 @@
-const http = require('http');
+const cors = require('cors');
+const express = require('express');
+const app = express();
 
-const server = http.createServer((req, res) => {
-    if (req.method === 'GET') {
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.writeHead(200);
-        res.end('Hello World!');
-    } else {
-        res.writeHead(405);
-        res.end();
-    }
+app.use(cors());
+
+app.get('/hello', (req, res) => {
+    res.send('Hello World!');
 });
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
